@@ -19,7 +19,7 @@ class WechatAccessibilityDemo extends HTMLElement {
           </div>
           <div class="wechat-thread">
             <span class="wechat-timestamp">Today · 3:42 PM</span>
-            <div class="wechat-message wechat-message-sent">Are we still on for Sunday?</div>
+            <div class="wechat-message wechat-message-sent" lang="zh-Hans">周日还一起吃饭吗？</div>
             <div class="wechat-message-group">
               <span class="wechat-avatar" aria-hidden="true">M</span>
               <div>
@@ -30,7 +30,7 @@ class WechatAccessibilityDemo extends HTMLElement {
                 </div>
                 <div class="wechat-transcript" data-transcript>
                   <strong>Automatic transcript</strong>
-                  Yes! Come over around noon. I’ll make dumplings, and we can eat together.
+                  <span lang="zh-Hans">周日中午一起吃饭，十二点在老地方见。</span>
                 </div>
               </div>
             </div>
@@ -46,7 +46,7 @@ class WechatAccessibilityDemo extends HTMLElement {
           </div>
           <div class="wechat-call-stage">
             <span class="wechat-call-avatar" aria-hidden="true">M</span>
-            <div class="wechat-caption" aria-live="polite" aria-atomic="true"></div>
+            <div class="wechat-caption" lang="zh-Hans" aria-live="polite" aria-atomic="true"></div>
           </div>
           <div class="wechat-screen-foot wechat-call-controls">
             <button type="button" class="wechat-button" data-play>Play sample call</button>
@@ -75,9 +75,8 @@ class WechatAccessibilityDemo extends HTMLElement {
     transcriptButton.addEventListener("click", () => showTranscript(transcript.hidden));
 
     const captions = [
-      "Mei: Hi! Can you see me?",
-      "Mei: I’m getting everything ready for Sunday.",
-      "Mei: Come by around noon. See you then!"
+      "我们周日中午见，",
+      "十二点在老地方。"
     ];
     const play = this.querySelector("[data-play]");
     const cc = this.querySelector("[data-cc]");
@@ -88,7 +87,7 @@ class WechatAccessibilityDemo extends HTMLElement {
     let line = -1;
 
     const renderCaption = () => {
-      const status = line < 0 ? "Captions will appear here." : "Sample call ended.";
+      const status = line < 0 ? "字幕将在此显示。" : "通话已结束。";
       caption.textContent = captionsOn ? (captions[line] ?? status) : "";
     };
 
