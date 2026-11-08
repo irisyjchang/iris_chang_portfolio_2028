@@ -364,7 +364,7 @@ const _pb=document.getElementById('pauseBtn');if(_pb)_pb.addEventListener('click
 const delays=[3.5,4.6,5.7];const baseL=[15,44,72],baseB=[3,1.8,3];const W=heroImg?heroImg.clientWidth:1000;const heads=[.10,.45,.685];const centres=[.21,.50,.78];
 document.querySelectorAll('.petal-fall').forEach((a,i)=>{a.querySelectorAll('.petal-img').forEach(im=>{if(heroImg)im.setAttribute('href',heroImg.src)});
 a.style.animationDelay=delays[i].toFixed(2)+'s';a.style.animationDuration=rnd(2.3,3.3).toFixed(2)+'s';
-a.style.left=(baseL[i]+rnd(-4,4)).toFixed(1)+'%';a.style.bottom=(baseB[i]+rnd(-1.5,2.6)).toFixed(1)+'%';
+a.style.setProperty('--petal-left',(baseL[i]+rnd(-4,4)).toFixed(1)+'%');a.style.bottom=(baseB[i]+rnd(-1.5,2.6)).toFixed(1)+'%';
 const x0=(heads[i]-centres[i])*W+rnd(-16,16);a.style.setProperty('--x0',x0.toFixed(0)+'px');a.style.setProperty('--x1',(x0*.55+rnd(-22,22)).toFixed(0)+'px');a.style.setProperty('--x2',(x0*.25+rnd(-16,16)).toFixed(0)+'px');
 a.style.setProperty('--r0',rnd(-235,-105).toFixed(0)+'deg');a.style.setProperty('--tilt',rnd(-21,25).toFixed(0)+'deg')})})();
 document.querySelectorAll('.petal-fall').forEach(a=>{if(reduced){a.classList.add('settled')}else{a.addEventListener('animationend',()=>a.classList.add('settled'),{once:true})}});

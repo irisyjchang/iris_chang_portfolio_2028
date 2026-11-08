@@ -1,13 +1,22 @@
 #garden.hero {
-  margin: clamp(10px, 2vw, 26px) auto clamp(32px, 5vw, 62px);
-  width: min(1440px, calc(100% - clamp(28px, 6vw, 84px)));
+  margin: 0;
+  width: 100%;
+  min-height: 100svh;
   border: 1px solid #8f805e;
   border-left: clamp(5px, 1vw, 13px) solid #9b8865;
   border-radius: 10px 24px 24px 10px;
   background: #f4ecd7;
   overflow: hidden;
-  box-shadow: 3px 3px #f6efdc, 5px 5px #b6a582, 8px 7px #d8c9a8,
-    11px 10px #73634a, 14px 19px 33px #51452e46;
+}
+
+#garden .hero-img,
+#garden .fg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
 }
 
 #garden.hero::after {
@@ -17,8 +26,18 @@
   inset: 0;
   border-radius: inherit;
   background: linear-gradient(90deg, #5e4b3b45, #fff0c530 12px, transparent 26px);
-  box-shadow: inset 0 0 0 1px #fff8e59c, inset -3px -3px 5px #725a3742;
+  box-shadow: inset 0 0 0 1px #fff8e59c, inset -3px -3px #aa9672,
+    inset -5px -5px #efe4c8, inset -7px -7px #baaa89, inset -10px -10px 5px #725a3742;
   pointer-events: none;
+}
+
+#garden .petal-fall { left: var(--petal-left); }
+
+@media (max-width: 540px) {
+  #garden .petal-fall:nth-child(1) { left: 7%; }
+  #garden .petal-fall:nth-child(2) { left: 38%; }
+  #garden .petal-fall:nth-child(3) { left: 68%; }
+  #garden .big-petal { width: clamp(69px, 24vw, 100px); }
 }
 
 #work.page {
