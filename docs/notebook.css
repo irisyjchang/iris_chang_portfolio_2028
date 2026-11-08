@@ -34,6 +34,27 @@
 #garden .petal-fall { left: var(--petal-left); }
 #garden .petal-fall .petal-label { opacity: 1; color: #443a36; }
 
+.cover-contact {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.cover-contact a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  color: #4b4946;
+  font: 500 22px/1 Caveat, cursive;
+  text-decoration: underline;
+  text-underline-offset: .18em;
+}
+
+.cover-contact a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
 #garden-jacket { width: 100%; }
 .garden-cover-back { display: none; }
 
@@ -79,9 +100,8 @@ body.notebook-view:not(.notebook-opening) #garden-jacket { display: none; }
 }
 
 @container (max-width: 580px) {
-  #garden .petal-fall:nth-child(1) { left: 7%; }
-  #garden .petal-fall:nth-child(2) { left: 38%; }
-  #garden .petal-fall:nth-child(3) { left: 68%; }
+  #garden .petal-fall:nth-child(1) { left: 13%; }
+  #garden .petal-fall:nth-child(2) { left: 59%; }
   #garden .big-petal { width: clamp(69px, 24vw, 100px); }
 }
 
@@ -104,7 +124,7 @@ body.notebook-view #work.page { max-width: none; padding: 0; }
   --packet-row: clamp(208px, 27svh, 260px);
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 100%);
+  grid-template-columns: repeat(2, 100%);
   min-height: 100svh;
   overflow-x: auto;
   overscroll-behavior-x: contain;
@@ -164,7 +184,6 @@ body.notebook-view #work.page { max-width: none; padding: 0; }
   transform: rotate(-4deg);
   pointer-events: none;
 }
-.notebook-note .rn-highlight { background: linear-gradient(transparent 57%, #b4a68e65 57% 89%, transparent 89%); }
 .notebook-photo {
   width: min(100%, 290px);
   margin: 33px 0 0 5px;
@@ -174,24 +193,6 @@ body.notebook-view #work.page { max-width: none; padding: 0; }
   box-shadow: 0 4px 10px #67563740;
 }
 .notebook-photo img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-.notebook-note form { gap: 12px; }
-.notebook-note input, .notebook-note textarea {
-  display: block;
-  margin-top: 4px;
-  border: 1px solid #a99c80;
-  border-radius: 5px;
-  background: #fffaf0a8;
-  color: var(--notebook-ink);
-}
-.notebook-note button.send {
-  justify-self: start;
-  border: 1px solid #7e7462;
-  border-radius: 5px;
-  background: #f8f1df;
-  color: var(--notebook-ink);
-}
-.notebook-contact-status { margin: 0 0 14px; color: #5e5545; font-size: 13px; }
-.notebook-note #thanks { margin: 0; }
 
 #work .notebook-heading h2 {
   margin: 15px 0 0;
