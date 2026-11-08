@@ -551,12 +551,12 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
         <h3 class="pk-int-title" id="pkIntTitle"></h3>
         <p class="pk-int-tagline"></p>
         <p class="pk-int-desc"></p>
-        <button class="pk-int-primary" type="button" hidden>Try the interactive prototype &darr;</button>
+        <a class="pk-int-primary" target="_blank" rel="noreferrer" hidden>Open full prototype &nearr;</a>
       </div>
       <img class="pk-int-shot" alt="">
       <figure class="pk-int-demo" hidden>
-        <video controls muted playsinline preload="metadata" aria-label="15-second With. demo"></video>
-        <figcaption></figcaption>
+        <div class="pk-int-embed-slot"></div>
+        <figcaption>Interactive Figma prototype. Pick a frame, then try Pose, Angles, or Feedback.</figcaption>
       </figure>
       <button class="pk-int-cue" type="button">Scroll to explore &darr;</button>
     </div>
@@ -634,7 +634,7 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
         intDesc=interior.querySelector('.pk-int-desc'),
         intShot=interior.querySelector('.pk-int-shot'),
         intDemo=interior.querySelector('.pk-int-demo'),
-        intVideo=intDemo.querySelector('video'),
+        intEmbedSlot=intDemo.querySelector('.pk-int-embed-slot'),
         intPrimary=interior.querySelector('.pk-int-primary'),
         intCue=interior.querySelector('.pk-int-cue'),
         intNav=interior.querySelector('.pk-int-nav'),
@@ -656,11 +656,6 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
       desc:'I led a four-person team to build With., a video review tool for skaters. I designed and built the frontend around a question I know from practice: what happened in that moment on the ice?',
       prototypeUrl:withPrototype,
       prototypeEmbed:withEmbed,
-      demo:{
-        src:'images/with/review-demo.mp4',
-        poster:'images/with/review.webp',
-        caption:'15 seconds from my app walkthrough. I review my sit spin combo, switch the analysis overlays, and open Feedback.'
-      },
       sections:[
         {
           id:'cs-problem',nav:'Problem',h:'Hearing the blade is part of reading the movement',
@@ -676,11 +671,6 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
             'In the Figma prototype, I linked the thumbnail strip to the timeline. A thumbnail takes you to a recognizable position in the spin. From there, the scrubber lets you inspect what happened just before and after it.'
           ],
           fig:'images/with/review.webp',tall:true,cap:'My sit spin combo in the app, with the pose overlay visible.'
-        },
-        {
-          id:'cs-prototype',nav:'Prototype',h:'Try the interactive prototype',
-          paras:['Pick a frame in my sit spin combo, then try Pose, Angles, or Feedback.'],
-          prototype:true
         },
         {
           id:'cs-role',nav:'My role',h:'From skating practice to a working prototype',
@@ -699,8 +689,6 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
         }
       ],
       links:[
-        {label:'Try the Figma prototype',href:withPrototype},
-        {label:'Open the hackathon app',href:'https://dubhacks-frontend.vercel.app/'},
         {label:'View GitHub',href:'https://github.com/irisyjchang/dubhacks-2026'},
         {label:'View Devpost',href:'https://devpost.com/software/with'}
       ]
@@ -964,9 +952,6 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
       sec.paras.forEach(p=>{ html+='<p>'+p+'</p>'; });
       if(sec.fig){ html+=figHTML(sec.fig==='thumb'?thumb:sec.fig, sec.cap||'', sec.tall); }
       if(sec.video){ html+='<div class="pk-int-video"><iframe src="https://www.youtube-nocookie.com/embed/'+sec.video+'" title="With. — demo video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>'; }
-      if(sec.prototype && copy.prototypeEmbed){
-        html+='<div class="pk-int-embed" data-src="'+copy.prototypeEmbed+'"><div class="pk-int-embed-actions"><button class="pk-int-primary" type="button" data-load-prototype>Load the Figma prototype</button><a href="'+copy.prototypeUrl+'" target="_blank" rel="noreferrer">Open in Figma &nearr;</a></div><div class="pk-int-embed-slot"></div></div>';
-      }
       html+='</section>';
     });
     if(copy.links){ html+='<div class="pk-int-linksrow">'+copy.links.map(l=>'<a href="'+l.href+'" target="_blank" rel="noreferrer">'+l.label+' &nearr;</a>').join('')+'</div>'; }
@@ -998,19 +983,22 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
     interior.classList.toggle('is-with',isWith);
     if(isWith && location.hash!=='#with') history.replaceState(null,'','#with');
     intPrimary.hidden=!copy.prototypeEmbed;
-    intShot.hidden=Boolean(copy.demo);
-    if(!copy.demo){
+    intShot.hidden=Boolean(copy.prototypeEmbed);
+    if(copy.prototypeEmbed){
+      intPrimary.href=copy.prototypeUrl;
+      intShot.removeAttribute('src');
+      const frame=document.createElement('iframe');
+      frame.title='With. interactive Figma prototype';
+      frame.src=copy.prototypeEmbed;
+      frame.allow='autoplay; fullscreen';
+      frame.allowFullscreen=true;
+      intEmbedSlot.replaceChildren(frame);
+    } else {
+      intPrimary.removeAttribute('href');
       intShot.src=copy.shot||thumb;
       intShot.alt=copy.previewAlt||bagBtn.dataset.title+' project preview';
-    } else {
-      intShot.removeAttribute('src');
     }
-    intDemo.hidden=!copy.demo;
-    if(copy.demo){
-      intVideo.src=copy.demo.src;
-      intVideo.poster=copy.demo.poster;
-      intDemo.querySelector('figcaption').textContent=copy.demo.caption;
-    }
+    intDemo.hidden=!copy.prototypeEmbed;
     buildSheet(copy,thumb);
     interior.hidden=false;
     previousOverflow=document.body.style.overflow;
@@ -1037,7 +1025,6 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
     if(!intOpen) return; intOpen=false;
     if(interiorTween) interiorTween.kill();
     if(spy) spy.disconnect();
-    intVideo.pause();
     const done=()=>{
       interior.hidden=true;
       interior.style.visibility='hidden';
@@ -1045,8 +1032,7 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
       document.body.style.overflow=previousOverflow;
       backgroundNodes.forEach(el=>el.inert=previousInert.get(el)||false);
       previousInert.clear();
-      intVideo.removeAttribute('src');
-      intVideo.load();
+      intEmbedSlot.replaceChildren();
       intSheet.querySelectorAll('iframe').forEach(frame=>frame.remove());
       if(lastBag?.dataset.project==='with' && location.hash==='#with') history.replaceState(null,'','#work');
       if(lastBag?.disabled) lastBag.closest('.pk-wrap').querySelector('.pk-flap').focus();
@@ -1061,29 +1047,6 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
   intCue.addEventListener('click',()=>{
     const y=intSheet.getBoundingClientRect().top-intScroll.getBoundingClientRect().top+intScroll.scrollTop-84;
     intScroll.scrollTo({top:y,behavior:reduced?'auto':'smooth'});
-  });
-  const loadPrototype=()=>{
-    const host=intSheet.querySelector('.pk-int-embed');
-    if(!host) return;
-    const slot=host.querySelector('.pk-int-embed-slot');
-    if(!slot.firstElementChild){
-      const frame=document.createElement('iframe');
-      frame.title='With. interactive Figma prototype';
-      frame.src=host.dataset.src;
-      frame.allow='autoplay; fullscreen';
-      frame.allowFullscreen=true;
-      slot.append(frame);
-      host.querySelector('[data-load-prototype]').hidden=true;
-    }
-    slot.firstElementChild.focus({preventScroll:true});
-  };
-  intPrimary.addEventListener('click',()=>{
-    loadPrototype();
-    const link=intLinks.querySelector('[data-sec="cs-prototype"]');
-    if(link) link.click();
-  });
-  intSheet.addEventListener('click',e=>{
-    if(e.target.closest('[data-load-prototype]')) loadPrototype();
   });
   document.querySelectorAll('.pk-bag-btn').forEach(b=>b.addEventListener('click',()=>openInterior(b)));
   intClose.addEventListener('click',closeInterior);
@@ -1102,7 +1065,7 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
     if(!intOpen) return;
     if(e.key==='Escape'){e.preventDefault();closeInterior();return;}
     if(e.key!=='Tab') return;
-    const focusable=[...interior.querySelectorAll('a[href],button:not(:disabled),[tabindex="0"],iframe,video[controls]')].filter(el=>el.getClientRects().length);
+    const focusable=[...interior.querySelectorAll('a[href],button:not(:disabled),[tabindex="0"],iframe')].filter(el=>el.getClientRects().length);
     const first=focusable[0],last=focusable[focusable.length-1];
     if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
     else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
@@ -1117,8 +1080,8 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
 .pk-interior.is-with .pk-int-fabric{background:#f6f3eb;box-shadow:none}
 .pk-interior.is-with .pk-int-seedsbar{display:none}
 .pk-interior.is-with .pk-int-hero{
-  display:grid;grid-template-columns:minmax(0,440px) minmax(230px,315px);
-  grid-template-areas:"intro demo" "cue demo";gap:16px clamp(24px,6vw,88px);
+  display:grid;grid-template-columns:minmax(0,410px) minmax(280px,490px);
+  grid-template-areas:"intro demo" "cue demo";gap:16px clamp(24px,5vw,68px);
   align-content:center;padding:112px 28px 46px;text-align:left;
 }
 .pk-interior.is-with .pk-int-copy{display:block;grid-area:intro;align-self:end}
@@ -1130,16 +1093,9 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
   font:600 14px/1.4 Inter,system-ui,sans-serif;
 }
 .pk-int-primary:hover{background:#46365f}
-.pk-int-embed-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin:16px 0}
-.pk-int-embed-actions a{color:#584776;text-underline-offset:3px;font:600 14px/1.4 Inter,system-ui,sans-serif}
-.pk-int-embed-slot iframe{display:block;width:100%;height:clamp(440px,72svh,720px);border:1px solid #ccbea8;border-radius:12px;background:#ece7dc}
+.pk-int-embed-slot iframe{display:block;width:100%;height:clamp(480px,72svh,720px);border:1px solid #ccbea8;border-radius:12px;background:#ece7dc}
 .pk-interior.is-with .pk-int-cue{grid-area:cue;align-self:start;justify-self:start;margin:0;padding:6px 0}
 .pk-int-demo{grid-area:demo;margin:0;align-self:center;justify-self:center;width:100%}
-.pk-int-demo video{
-  display:block;height:min(65svh,600px);max-width:100%;width:auto;margin-inline:auto;
-  aspect-ratio:480 / 1044;object-fit:contain;background:#202627;
-  border:1px solid #ccbea8;border-radius:16px;
-}
 .pk-int-demo figcaption{margin-top:9px;font:12px/1.5 Inter,system-ui,sans-serif;color:#645740}
 .pk-interior.is-with .pk-int-sheet{background:#fcfaf4;box-shadow:none;padding-bottom:56px}
 .pk-interior.is-with .pk-int-fig.tall img{max-width:min(100%,300px);margin-inline:auto}
@@ -1148,8 +1104,7 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
     grid-template-columns:minmax(0,440px);grid-template-areas:"intro" "demo" "cue";
     padding:94px 20px 26px;
   }
-  .pk-int-demo{width:min(100%,280px)}
-  .pk-int-demo video{height:auto;width:100%}
+  .pk-int-embed-slot iframe{height:clamp(470px,70svh,650px)}
 }
 </style>
 <style id="with-case-study-refinements">
