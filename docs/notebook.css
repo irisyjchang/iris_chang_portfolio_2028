@@ -1,0 +1,222 @@
+#garden.hero {
+  margin: clamp(10px, 2vw, 26px) auto clamp(32px, 5vw, 62px);
+  width: min(1440px, calc(100% - clamp(28px, 6vw, 84px)));
+  border: 1px solid #8f805e;
+  border-left: clamp(5px, 1vw, 13px) solid #9b8865;
+  border-radius: 10px 24px 24px 10px;
+  background: #f4ecd7;
+  overflow: hidden;
+  box-shadow: 3px 3px #f6efdc, 5px 5px #b6a582, 8px 7px #d8c9a8,
+    11px 10px #73634a, 14px 19px 33px #51452e46;
+}
+
+#garden.hero::after {
+  content: "";
+  position: absolute;
+  z-index: 12;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #5e4b3b45, #fff0c530 12px, transparent 26px);
+  box-shadow: inset 0 0 0 1px #fff8e59c, inset -3px -3px 5px #725a3742;
+  pointer-events: none;
+}
+
+#work.page {
+  max-width: 1230px;
+  padding: clamp(28px, 5vw, 68px) clamp(14px, 3vw, 38px);
+  background: transparent;
+}
+
+#work:focus { outline: none; }
+
+body.notebook-view #work.page { max-width: none; padding: 0; }
+
+body.notebook-ready:not(.notebook-view) #work,
+body.notebook-view #garden,
+body.notebook-view #about,
+body.notebook-view #hello,
+body.notebook-view footer { display: none; }
+
+.notebook-spread {
+  --notebook-ink: #4b4946;
+  --notebook-paper: #f5eedb;
+  --packet-row: clamp(208px, 27svh, 260px);
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  isolation: isolate;
+  perspective: 1600px;
+  border-radius: 24px;
+  background: #dfd1ad;
+  box-shadow: 3px 3px #c7b898, 5px 5px #a59370, 8px 7px #776b52, 10px 10px #574b38,
+    10px 19px 32px #51452e42;
+}
+
+.notebook-page {
+  position: relative;
+  min-width: 0;
+  padding: var(--packet-row) clamp(21px, 3vw, 42px) 68px;
+  color: var(--notebook-ink);
+  background-color: var(--notebook-paper);
+  background-image: var(--fold), repeating-linear-gradient(transparent 0 24px, #7e939429 24px 25px),
+    url("images/with/scratch-paper.svg");
+  background-position: center, 0 10px, center;
+  background-blend-mode: normal, normal, multiply;
+  box-shadow: inset 0 0 0 1px #7a69432e;
+}
+
+.notebook-left {
+  --fold: linear-gradient(90deg, #8b754414, transparent 6% 94%, #957d511e 98%, #6756374d);
+  border-radius: 24px 0 0 24px;
+}
+
+.notebook-view .notebook-spread { min-height: 100svh; }
+
+.notebook-right {
+  --fold: linear-gradient(90deg, #71603e4d, #b29b6922 2%, #fff9e878 5%, transparent 10% 95%, #8b75441f);
+  border-radius: 0 24px 24px 0;
+  transform-origin: left center;
+  backface-visibility: hidden;
+}
+
+.notebook-view .notebook-right {
+  box-shadow: inset -1px 0 #b7a37d, inset -3px 0 #e8ddc1, inset -5px 0 #c4b08c, inset 0 -1px #a79571;
+  animation: notebook-unfold 680ms cubic-bezier(.2, .7, .24, 1) both;
+}
+
+@keyframes notebook-unfold {
+  from { transform: rotateY(-84deg); }
+  to { transform: rotateY(0deg); }
+}
+
+.notebook-heading {
+  position: absolute;
+  z-index: 3;
+  top: 29px;
+  inset-inline: clamp(24px, 4vw, 58px);
+  padding-inline-end: clamp(66px, 10vw, 126px);
+  pointer-events: none;
+}
+
+.notebook-back {
+  display: inline-block;
+  color: #5d5548;
+  font-size: 12px;
+  text-underline-offset: 3px;
+  pointer-events: auto;
+}
+
+#work .notebook-heading h2 {
+  margin: 15px 0 0;
+  color: var(--notebook-ink);
+  font-size: clamp(38px, 5vw, 62px);
+  line-height: 1.02;
+}
+
+#work .notebook-heading .lead { margin: 8px 0 0; color: #504a40; font-size: 14px; }
+
+#work .notebook-petal {
+  position: absolute;
+  top: 32px;
+  right: 8px;
+  width: clamp(54px, 9vw, 100px);
+  margin: 0;
+}
+
+.notebook-packets { display: flex; justify-content: center; gap: clamp(13px, 2.2vw, 28px); }
+
+#work .pk-wrap { flex: 1 1 0; width: auto; max-width: 226px; }
+#work .pk-packet { min-height: 330px; padding: 107px clamp(10px, 1.4vw, 18px) 20px; }
+#work .pk-flap { height: 49px; }
+#work .pk-title { font-size: clamp(24px, 2.4vw, 32px); line-height: 1; }
+#work .pk-tag { font-size: 12px; }
+#work .pk-row { gap: 5px; }
+#work .pk-k { font-size: 9px; letter-spacing: .14em; }
+#work .pk-v { font-size: 11.5px; }
+
+.notebook-page-number { position: absolute; bottom: 22px; color: #5e5545; font: 22px/1 Caveat, cursive; }
+.notebook-left .notebook-page-number { left: 26px; }
+.notebook-right .notebook-page-number { right: 26px; }
+
+.notebook-binding {
+  position: absolute;
+  z-index: 4;
+  inset: 14% auto 13% 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 1px;
+  pointer-events: none;
+}
+
+.notebook-binding i {
+  position: relative;
+  display: block;
+  width: 2px;
+  height: clamp(32px, 6vw, 69px);
+  border-radius: 100%;
+  background: linear-gradient(90deg, #76603c, #e9d5a4 54%, #856d46);
+  box-shadow: 1px 0 2px #5d4a33a8;
+  transform: rotate(.8deg);
+}
+
+.notebook-binding i::before, .notebook-binding i::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #6b5132;
+}
+
+.notebook-binding i::before { top: 0; }
+.notebook-binding i::after { bottom: 0; }
+
+.notebook-pagination { display: none; }
+
+@media (max-width: 860px) {
+  .notebook-spread {
+    --packet-row: 192px;
+    grid-template-columns: repeat(2, 100%);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    max-width: 575px;
+    margin-inline: auto;
+  }
+  .notebook-view .notebook-spread { max-width: none; min-height: calc(100svh - 70px); }
+  .notebook-page { scroll-snap-align: start; border-radius: 24px; }
+  .notebook-view .notebook-right { animation: none; }
+  .notebook-binding { display: none; }
+  .notebook-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    padding: 13px 0;
+  }
+  .notebook-pagination button {
+    min-height: 44px;
+    padding: 0 13px;
+    border: 1px solid #a49679;
+    border-radius: 4px;
+    background: #f5eedb;
+    color: #4b4946;
+    font: 500 14px/1 Inter, system-ui, sans-serif;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 500px) {
+  .notebook-page { padding-inline: 14px; }
+  .notebook-heading { inset-inline: 18px; }
+  #work .pk-packet { padding-inline: 7px; }
+  #work .pk-title { font-size: 23px; }
+  #work .pk-row { flex-wrap: wrap; justify-content: flex-start; gap: 2px 6px; }
+  #work .pk-v { text-align: left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notebook-view .notebook-right { animation: none; }
+}
