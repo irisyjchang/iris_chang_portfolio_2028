@@ -73,7 +73,7 @@ wechat-accessibility-demo [hidden] { display: none; }
 }
 
 .wechat-settings small { color: var(--wc-muted); font-size: 12px; font-weight: 400; }
-.wechat-demo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.wechat-demo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
 
 .wechat-screen {
   display: flex;
@@ -89,53 +89,63 @@ wechat-accessibility-demo [hidden] { display: none; }
 .wechat-screen-heading { padding: 14px 16px; border-bottom: 1px solid var(--wc-line); }
 .wechat-screen-heading > span { color: var(--wc-muted); }
 .wechat-screen-heading > strong { display: block; margin-top: 2px; font-size: 17px; }
+.wechat-phone { margin-block: 3px; }
+.pk-int-screen.wechat-chat {
+  display: flex;
+  flex-direction: column;
+  background: #141414;
+  color: #f3f3f3;
+}
+.wechat-chat .wechat-screen-heading {
+  padding-top: 32px;
+  border-color: #303030;
+  background: #1b1b1b;
+  text-align: center;
+}
+.wechat-chat .wechat-screen-heading > span { color: #bbb; }
 .wechat-thread {
-  display: grid;
-  align-content: start;
-  gap: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   flex: 1;
-  padding: 14px 12px;
-  background: #f4f6f2;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 12px 10px;
   font-size: var(--wc-text-size);
 }
 
-.wechat-timestamp { justify-self: center; color: var(--wc-muted); font-size: 11px; }
-.wechat-message { padding: 9px 11px; border-radius: 12px; }
-.wechat-message-sent { justify-self: end; border-bottom-right-radius: 3px; background: #d2edba; }
 .wechat-message-group { display: flex; gap: 7px; }
 .wechat-message-group > div { min-width: 0; }
 .wechat-avatar {
-  display: grid;
-  place-items: center;
-  flex: 0 0 30px;
-  height: 30px;
-  border-radius: 9px;
-  background: #d9e6d6;
-  color: #2e5239;
-  font-size: 14px;
-  font-weight: 700;
+  flex: 0 0 39px;
+  width: 39px;
+  height: 40px;
+  border-radius: 5px;
 }
 
-.wechat-speaker { display: block; margin-bottom: 4px; color: var(--wc-muted); font-size: 12px; }
+.wechat-meal { display: block; width: 76px; height: auto; align-self: start; border-radius: 6px; }
 .wechat-voice {
   display: inline-flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 3px 8px;
-  border: 1px solid var(--wc-line);
-  border-top-left-radius: 3px;
-  background: #fff;
-  color: #244b36;
-  font-size: 13px;
+  gap: 8px;
+  min-height: 44px;
+  min-width: 78px;
+  padding: 6px 12px;
+  border: 1px solid #565656;
+  border-radius: 4px 9px 9px;
+  background: #272727;
+  color: #eee;
+  font: inherit;
+  cursor: pointer;
 }
 
-.wechat-voice span { color: var(--wc-muted); font-size: 11px; }
+.wechat-voice:hover { background: #3a3a3a; }
 .wechat-transcript {
   margin-top: 7px;
-  padding: 10px 11px;
-  border-left: 3px solid #428657;
-  border-radius: 0 10px 10px 0;
-  background: #fff;
+  padding: 8px 9px;
+  border-radius: 4px 9px 9px;
+  background: #c6ecc9;
+  color: #193923;
   line-height: 1.45;
 }
 
@@ -148,7 +158,20 @@ wechat-accessibility-demo [hidden] { display: none; }
   text-transform: uppercase;
 }
 
+.wechat-reply-thread { align-self: flex-end; }
+.wechat-reply small { display: block; margin-bottom: 2px; color: #c5c5c5; text-align: right; }
+.wechat-reply span {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 9px 4px 9px 9px;
+  background: #8ddd99;
+  color: #12341d;
+}
+
 .wechat-screen-foot { padding: 10px 12px; border-top: 1px solid var(--wc-line); }
+.wechat-chat .wechat-screen-foot { border-color: #303030; background: #1b1b1b; }
+.wechat-chat .wechat-send { display: flex; align-items: center; justify-content: space-between; gap: 5px; width: 100%; }
+.wechat-send:disabled { cursor: default; }
 .wechat-button {
   min-height: 44px;
   padding: 7px 11px;
@@ -209,9 +232,10 @@ wechat-accessibility-demo [hidden] { display: none; }
 .pk-int-sheet .wechat-demo-note { margin-top: 12px; }
 
 .wechat-family-photos { margin-top: 32px; }
-.wechat-family-photos h5 {
-  margin: 0 0 18px;
-  font: 600 clamp(20px, 4vw, 26px)/1.25 Georgia, serif;
+.wechat-family-photos summary {
+  padding: 10px 0;
+  font: 600 16px/1.4 Georgia, serif;
+  cursor: pointer;
 }
 
 .wechat-family-phones {
@@ -219,7 +243,7 @@ wechat-accessibility-demo [hidden] { display: none; }
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 28px;
   justify-items: center;
-  padding-inline: 6px;
+  padding: 12px 6px 0;
 }
 
 .wechat-family-phones .pk-int-fig { width: min(100%, 306px); margin: 0; }

@@ -5,8 +5,8 @@
 <link rel="preconnect" href="https://embed.figma.com">
 <link rel="preconnect" href="https://www.figma.com">
 <link rel="stylesheet" href="notebook.css?v=mobile-layout">
-<link rel="stylesheet" href="wechat-demo.css?v=family-chat">
-<script src="wechat-demo.js?v=chinese-dialogue" defer></script>
+<link rel="stylesheet" href="wechat-demo.css?v=interactive-family-chat">
+<script src="wechat-demo.js?v=interactive-family-chat" defer></script>
 <style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,sans-serif;color:#2f3a33;background:#eef3ee}
 :focus-visible{outline:3px solid #7a5aa6;outline-offset:3px;border-radius:8px}
@@ -904,9 +904,9 @@ document.querySelectorAll('.petal-fall').forEach(a=>{if(reduced){a.classList.add
       if(sec.fig){ html+=figHTML(sec.fig==='thumb'?thumb:sec.fig, sec.cap||'', sec.tall, isWith&&sec.tall); }
       if(sec.demo) html+='<wechat-accessibility-demo></wechat-accessibility-demo>';
       if(sec.photos){
-        html+='<div class="wechat-family-photos"><h5>From my family’s WeChat chat</h5><div class="wechat-family-phones">';
+        html+='<details class="wechat-family-photos"><summary>See the original family chat and slide mockup</summary><div class="wechat-family-phones">';
         sec.photos.forEach(({src,cap})=>{ html+=figHTML(src,cap,false,true); });
-        html+='</div></div>';
+        html+='</div></details>';
       }
       if(sec.video){ html+='<div class="pk-int-video"><iframe src="https://www.youtube-nocookie.com/embed/'+sec.video+'" title="With. — demo video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>'; }
       if(sec.id==='cs-problem'&&isWith) html+='<div class="with-taped-petal" aria-hidden="true"><img src="images/with/iris-petal.webp" alt="" width="279" height="283"></div>';
