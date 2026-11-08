@@ -46,15 +46,11 @@
   background: transparent;
 }
 
-#work:focus { outline: none; }
+#work:focus, .notebook-note:focus { outline: none; }
 
 body.notebook-view #work.page { max-width: none; padding: 0; }
 
-body.notebook-ready:not(.notebook-view) #work,
-body.notebook-view #garden,
-body.notebook-view #about,
-body.notebook-view #hello,
-body.notebook-view footer { display: none; }
+.notebook-section[hidden], body.notebook-view #garden { display: none; }
 
 .notebook-spread {
   --notebook-ink: #4b4946;
@@ -124,6 +120,45 @@ body.notebook-view footer { display: none; }
   text-underline-offset: 3px;
   pointer-events: auto;
 }
+
+.notebook-next-spread { position: absolute; top: 34px; right: clamp(24px, 4vw, 58px); }
+
+.notebook-note { padding: clamp(28px, 6vw, 72px) clamp(24px, 6vw, 80px) 68px; }
+.notebook-note-content { max-width: 520px; margin-inline: auto; }
+.notebook-note-links { display: flex; flex-wrap: wrap; gap: 10px 20px; }
+.notebook-note h2 {
+  margin: 27px 0 8px;
+  color: var(--notebook-ink);
+  font: 600 clamp(43px, 5.5vw, 64px)/1.05 Caveat, cursive;
+}
+.notebook-note .lead { margin: 0 0 20px; color: #504a40; }
+.notebook-photo {
+  width: min(100%, 290px);
+  margin: 33px 0 0 5px;
+  padding: 8px 8px 19px;
+  transform: rotate(-2deg);
+  background: #fcf7eb;
+  box-shadow: 0 4px 10px #67563740;
+}
+.notebook-photo img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.notebook-note form { gap: 12px; }
+.notebook-note input, .notebook-note textarea {
+  display: block;
+  margin-top: 4px;
+  border: 1px solid #a99c80;
+  border-radius: 5px;
+  background: #fffaf0a8;
+  color: var(--notebook-ink);
+}
+.notebook-note button.send {
+  justify-self: start;
+  border: 1px solid #7e7462;
+  border-radius: 5px;
+  background: #f8f1df;
+  color: var(--notebook-ink);
+}
+.notebook-contact-status { margin: 0 0 14px; color: #5e5545; font-size: 13px; }
+.notebook-note #thanks { margin: 0; }
 
 #work .notebook-heading h2 {
   margin: 15px 0 0;
@@ -215,7 +250,9 @@ body.notebook-view footer { display: none; }
     gap: 14px;
     padding: 13px 0;
   }
-  .notebook-pagination button {
+  .notebook-pagination button, .notebook-pagination a {
+    display: inline-flex;
+    align-items: center;
     min-height: 44px;
     padding: 0 13px;
     border: 1px solid #a49679;
@@ -223,6 +260,7 @@ body.notebook-view footer { display: none; }
     background: #f5eedb;
     color: #4b4946;
     font: 500 14px/1 Inter, system-ui, sans-serif;
+    text-decoration: none;
     cursor: pointer;
   }
 }
