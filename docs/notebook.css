@@ -382,9 +382,9 @@ body.notebook-view #work.page { max-width: none; padding: 0; }
   .scrapbook-projects #work .scrapbook-photo { display: block; }
 }
 @media (max-width: 860px) {
+  .notebook-binding { inset-block: 12%; height: auto; }
   .scrapbook-projects #work .notebook-page { padding: 164px 24px 54px; }
   .scrapbook-projects #work .notebook-petal { right: 55px; top: 12px; }
-  .scrapbook-projects .notebook-binding { height: min(62svh, 440px); }
   .scrapbook-projects #work .notebook-packets { flex-wrap: wrap; gap: 36px; }
   .scrapbook-projects #work .pk-wrap { flex: 1 1 166px; }
   .scrapbook-projects #work .pk-wrap:nth-child(n+2) { margin-top: 0; }

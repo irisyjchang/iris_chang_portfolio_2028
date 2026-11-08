@@ -4,7 +4,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://embed.figma.com">
 <link rel="preconnect" href="https://www.figma.com">
-<link rel="stylesheet" href="notebook.css?v=cover-contact">
+<link rel="stylesheet" href="notebook.css?v=mobile-layout">
 <style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,sans-serif;color:#2f3a33;background:#eef3ee}
 :focus-visible{outline:3px solid #7a5aa6;outline-offset:3px;border-radius:8px}
@@ -1086,11 +1086,10 @@ document.querySelectorAll('.petal-fall').forEach(a=>{if(reduced){a.classList.add
 .pk-int-embed-loading span:first-child{font:600 44px/1 Caveat,cursive}
 .pk-int-embed-loading[hidden]{display:none}
 .pk-int-embed-loading:not([hidden])+iframe{visibility:hidden}
-/* The Figma player adds 60px of padding. Crop the player to the phone display. */
 .pk-int-embed-slot iframe{
-  display:block;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:calc(100% + 122px);height:calc(100% + 122px);border:0;
+  display:block;position:absolute;inset:0;width:100%;height:100%;border:0;
 }
+.pk-int-embed-slot::after{content:none}
 .pk-interior.is-with .pk-int-cue{grid-area:cue;align-self:start;justify-self:start;margin:0;padding:8px 0;color:var(--with-ink);font:500 14px/1.4 Inter,system-ui,sans-serif}
 .pk-int-demo{grid-area:demo;margin:0;align-self:center;justify-self:center;width:100%}
 .pk-int-demo figcaption{margin:15px auto 0;max-width:34ch;text-align:center;font:12px/1.5 Inter,system-ui,sans-serif;color:var(--with-ink)}
