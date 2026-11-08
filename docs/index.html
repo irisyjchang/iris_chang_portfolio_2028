@@ -841,12 +841,22 @@ document.querySelectorAll('.petal-fall').forEach(a=>{if(reduced){a.classList.add
       ]
     },
     {
+      "id": "wc-existing",
+      "nav": "Existing tools",
+      "h": "What existing accessibility tools cover",
+      "paras": [
+        "<strong>Apple.</strong> Live Captions can transcribe app audio, including FaceTime, on supported iPhones. It is enabled in iPhone Accessibility settings, and availability varies by language and region. It helps with listening in the moment. I wanted the transcript to sit beneath the original voice message so someone could find and reread it later in the chat.",
+        "<strong>Huawei.</strong> Huawei offers Xiaoyi Captions for spoken audio. Its support documentation says that on HarmonyOS 5.0 and later, Xiaoyi Captions is unavailable during WeChat voice and video calls. That makes it an unreliable fallback for the call flow I’m designing.",
+        "<strong>WeChat.</strong> Easy Mode (关怀模式) already offers larger text and buttons, higher contrast, and an option to listen to text messages. Reading a text message aloud helps people who have trouble seeing the screen. My proposal addresses the other direction by turning spoken messages into readable text."
+      ]
+    },
+    {
       "id": "wc-redesign",
       "nav": "Redesign",
       "h": "Bring the words into view",
       "paras": [
-        "For voice messages, the proposal uses automatic transcription to make spoken content available as text with less repeated interaction.",
-        "For video calls, a visible CC button toggles live captions. A filled state signals captions are on; a translucent state signals they are off. The presentation also proposes adding these features to Easy Mode."
+        "When my grandparents want to talk to family, they open WeChat and go straight to our group chat. I chose Easy Mode as the place to set up the redesign because it lets them turn on the features inside the app they already open every day.",
+        "Once automatic transcripts are enabled, each voice message can show its text right underneath, ready to read at their own pace. During a video call, a visible CC button lets them turn captions on or off without leaving the conversation."
       ],
       "demo": true,
       "photos": [
@@ -883,6 +893,18 @@ document.querySelectorAll('.petal-fall').forEach(a=>{if(reduced){a.classList.add
     {
       "label": "View original presentation",
       "href": "https://docs.google.com/presentation/d/1biEBPrzCHsx2850UmxAKnnrGNiqvE_pfWS74NCeq4oA/edit?usp=sharing"
+    },
+    {
+      "label": "Apple Live Captions",
+      "href": "https://support.apple.com/en-ae/guide/iphone/iphe0990f7bb/27/ios/27"
+    },
+    {
+      "label": "Huawei Xiaoyi Captions",
+      "href": "https://consumer.huawei.com/cn/support/content/zh-cn16013024/"
+    },
+    {
+      "label": "Tencent on WeChat Easy Mode",
+      "href": "https://static.www.tencent.com/uploads/2024/05/29/045cba29b4153119f3cd17c406ac2433.pdf"
     }
   ]
 }
