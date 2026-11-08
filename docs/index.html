@@ -1063,7 +1063,8 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
 }
 .is-with #cs-review::before{
   content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  background:var(--with-grain),linear-gradient(175deg,#ede7da,#e7dfcf 63%,#eee6d8);
+  background:url("images/with/scratch-paper.svg"),linear-gradient(175deg,#efe9db,#e8e0d0 63%,#f0e7d7);
+  background-blend-mode:multiply,normal;
   mask-image:url("images/with/paper-tear-top.svg"),linear-gradient(#000,#000),url("images/with/paper-tear-bottom.svg");
   mask-size:100% var(--tear-depth),100% calc(100% - 2 * var(--tear-depth) + 4px),100% var(--tear-depth);
   mask-position:top,center,bottom;
