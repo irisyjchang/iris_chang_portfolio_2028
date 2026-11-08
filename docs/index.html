@@ -496,7 +496,7 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
       <img class="pk-int-shot" alt="">
       <figure class="pk-int-demo" hidden>
         <div class="pk-int-phone">
-          <div class="pk-int-embed-slot">
+          <div class="pk-int-screen pk-int-embed-slot">
             <div class="pk-int-embed-loading" role="status" hidden>
               <span>With.</span>
               <span>Loading the interactive demo…</span>
@@ -589,7 +589,11 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
         intNavTitle=interior.querySelector('.pk-int-navtitle'),
         intLinks=interior.querySelector('.pk-int-links'),
         intClose=interior.querySelector('.pk-int-close');
-  const figHTML=(src,cap,tall)=>'<figure class="pk-int-fig'+(tall?' tall':'')+'"><img src="'+src+'" alt="'+cap+'" loading="lazy" decoding="async"><figcaption>'+cap+'</figcaption></figure>';
+  const figHTML=(src,cap,tall,phone)=>{
+    const image='<img src="'+src+'" alt="'+cap+'" loading="lazy" decoding="async">';
+    const preview=phone ? '<div class="pk-int-phone"><div class="pk-int-screen">'+image+'</div></div>' : image;
+    return '<figure class="pk-int-fig'+(tall?' tall':'')+'">'+preview+'<figcaption>'+cap+'</figcaption></figure>';
+  };
   const PLACEHOLDER=(d)=>({meta:'Case study · Gesture Team',tagline:'',desc:d,shot:null,sections:[
     {id:'cs-overview',nav:'Overview',h:'Overview',paras:['[Placeholder overview] Two or three sentences that set the scene: what this product is, who it serves, and why the work mattered.'],fig:'thumb',cap:'Key screen — placeholder screenshot.'},
     {id:'cs-problem',nav:'Problem',h:'The problem',paras:['[Placeholder problem] What was not working — the friction people hit, what the evidence showed, and what it cost them.']},
@@ -601,38 +605,34 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
     {
       meta:'DubHacks ’26 · Hackathon project',
       tagline:'Figure skating review between coaching sessions',
-      desc:'I led a four-person team to build With., a video review tool for skaters. I designed and built the frontend around a question I know from practice: what happened in that moment on the ice?',
+      desc:'With. is a DubHacks prototype that helps figure skaters review practice footage between lessons.',
       prototypeUrl:withPrototype,
       prototypeEmbed:withEmbed,
       sections:[
         {
-          id:'cs-problem',nav:'Problem',h:'Hearing the blade is part of reading the movement',
+          id:'cs-problem',nav:'Problem',h:'Finding the moment that felt off',
           paras:[
-            'When I practice between coaching sessions, I film my skating so I can go back to a moment that felt off. A full-speed replay makes it hard to pinpoint when my position changed.',
-            'I listen for when the blade catches or the scrape changes. That sound helps me find the moment I want to replay and judge what happened alongside what I can see. Music and rink noise can bury that cue.'
+            'Between lessons, I film my skating to figure out why a move felt off. At full speed, it’s hard to spot when my position changes. A change in the sound of my blade can help me find that moment, but rink noise can cover it up.'
           ]
         },
         {
-          id:'cs-review',nav:'Design',h:'Make a fast movement easy to inspect',
+          id:'cs-review',nav:'Design',h:'Keep the skater in view',
           paras:[
-            'I kept the footage as the backdrop for Analysis so the skater stays in view while you use the tools. Pose and angle overlays can be toggled independently, and feedback opens over the clip.',
-            'In the Figma prototype, I linked the thumbnail strip to the timeline. A thumbnail takes you to a recognizable position in the spin. From there, the scrubber lets you inspect what happened just before and after it.'
+            'I kept the video behind the controls so skaters could scrub to a moment, toggle pose or joint angles, and read feedback in context. The Figma walkthrough uses footage of my sit spin combo.'
           ],
-          fig:'images/with/review.webp',tall:true,cap:'The pancake position in my sit spin combo, with pose and angle overlays visible.'
+          fig:'images/with/review.webp',tall:true,cap:'My pancake position with pose and angle overlays.'
         },
         {
-          id:'cs-role',nav:'My role',h:'From skating practice to a working prototype',
+          id:'cs-role',nav:'My role',h:'From upload to feedback',
           paras:[
-            'I led our four-person DubHacks team, translated skater and coach needs into product requirements, and designed and implemented the React and Next.js frontend. I connected the review flow to our asynchronous analysis API and integrated Clerk authentication.',
-            'My teammates built the underlying skating analysis. The hackathon app connects footage to AI-generated feedback. The Figma walkthrough shows how I refined the review interaction after the event.'
+            'I designed and built the Next.js review interface, connected it to our analysis API, and added Clerk sign-in. Our four-person team built a prototype that turns pose and movement measurements into feedback tied to moments in the clip.'
           ],
-          fig:'images/with/feedback.webp',tall:true,cap:'Feedback opens over the footage so the skater can connect a note to the clip.'
+          fig:'images/with/feedback.webp',tall:true,cap:'Technique feedback and drills over the footage.'
         },
         {
           id:'cs-next',nav:'Next steps',h:'Blade Focus',
           paras:[
-            'I want skaters to be able to replay a moment and hear blade contact clearly enough to use it as a technique cue. Blade Focus would lower rink noise while preserving the scrape, its timing, and the changes a skater listens for.',
-            'My first filtering pass sounded choppy. I’d compare the original and filtered recordings with skaters and ask them to identify the same moments in both. That would tell me whether the filter preserved the cues that matter.'
+            'I’d test whether reducing rink noise makes blade contact easier to hear. I’d ask skaters to compare the original and filtered audio and mark where they hear the blade catch or the scrape change.'
           ]
         }
       ],
@@ -797,14 +797,14 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
   const buildSheet=(copy,thumb)=>{
     const isWith=copy===INT_COPY[0];
     let html='<p class="pk-int-kicker">'+copy.meta+'</p>';
-    if(isWith) html='<div class="with-facts">'+html+'<dl class="pk-int-facts"><div><dt>My role</dt><dd>Team lead, UI/UX and frontend</dd></div><div><dt>Team</dt><dd>Four collaborators</dd></div><div><dt>When</dt><dd>October 2026</dd></div></dl></div>';
+    if(isWith) html='<div class="with-facts">'+html+'<dl class="pk-int-facts"><div><dt>My role</dt><dd>UI/UX and frontend</dd></div><div><dt>Team</dt><dd>Four people</dd></div><div><dt>When</dt><dd>October 2026</dd></div></dl></div>';
     copy.sections.forEach(sec=>{
       html+='<section id="'+sec.id+'">';
       if(isWith) html+='<div class="with-section"><div><p class="with-section-label">'+sec.nav+'</p>';
       html+='<h4>'+sec.h+'</h4>';
       sec.paras.forEach(p=>{ html+='<p>'+p+'</p>'; });
       if(isWith) html+='</div>';
-      if(sec.fig){ html+=figHTML(sec.fig==='thumb'?thumb:sec.fig, sec.cap||'', sec.tall); }
+      if(sec.fig){ html+=figHTML(sec.fig==='thumb'?thumb:sec.fig, sec.cap||'', sec.tall, isWith&&sec.tall); }
       if(sec.video){ html+='<div class="pk-int-video"><iframe src="https://www.youtube-nocookie.com/embed/'+sec.video+'" title="With. — demo video" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>'; }
       if(sec.id==='cs-problem'&&isWith) html+='<div class="with-taped-petal" aria-hidden="true"><img src="images/with/iris-petal.webp" alt="" width="279" height="283"></div>';
       if(isWith) html+='</div>';
@@ -975,9 +975,9 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
 }
 .pk-int-phone::before{top:19%;left:-5px;height:26px;box-shadow:0 36px var(--phone-button)}
 .pk-int-phone::after{top:23%;right:-5px;height:46px}
-.pk-int-embed-slot{position:relative;overflow:hidden;aspect-ratio:393 / 852;border-radius:30px;background:#e9ebec;box-shadow:0 0 0 2px #252427}
-.pk-int-embed-slot::after{
-  content:"";position:absolute;top:8px;left:50%;width:25%;height:clamp(13px,1.8svh,19px);
+.pk-int-screen{position:relative;overflow:hidden;aspect-ratio:393 / 852;border-radius:30px;background:#e9ebec;box-shadow:0 0 0 2px #252427}
+.pk-int-screen::after{
+  content:"";position:absolute;top:8px;left:50%;width:25%;aspect-ratio:4.35;
   transform:translateX(-50%);border-radius:999px;background:#252427;pointer-events:none;
 }
 .pk-int-embed-loading{
@@ -1070,10 +1070,12 @@ var RoughNotation=function(t){"use strict";const e="http://www.w3.org/2000/svg";
   mask-repeat:no-repeat;
 }
 .is-with .pk-int-fig{width:min(100%,255px);justify-self:center;margin:0}
-.is-with .pk-int-fig img{border:6px solid #faf7ed;border-bottom-width:14px;box-shadow:0 6px 16px #48374036}
-.is-with .pk-int-fig figcaption{color:var(--with-ink);font:400 12px/1.5 Inter,system-ui,sans-serif}
+.is-with .pk-int-fig .pk-int-screen img{height:100%;border:0;border-radius:0;box-shadow:none;object-fit:cover}
+.is-with .pk-int-fig figcaption{margin-top:15px;color:var(--with-ink);font:400 12px/1.5 Inter,system-ui,sans-serif}
 .is-with #cs-role .with-section{grid-template-columns:minmax(170px,.68fr) minmax(0,1fr)}
 .is-with #cs-role .pk-int-fig{grid-column:1;grid-row:1}
+/* The Feedback capture includes its own Dynamic Island. */
+.is-with #cs-role .pk-int-screen::after{content:none}
 .is-with #cs-role .with-section>div{grid-column:2;grid-row:1}
 .is-with #cs-next{background:var(--with-grain),#ede8dc;border-block:1px solid #d9d1c3}
 .is-with #cs-next .with-section{display:block}
