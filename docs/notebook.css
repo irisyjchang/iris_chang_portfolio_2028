@@ -6,6 +6,7 @@
   border-radius: 24px;
   background: #f4ecd7;
   overflow: hidden;
+  container-type: inline-size;
 }
 
 #garden .hero-img,
@@ -31,7 +32,7 @@
 
 #garden .petal-fall { left: var(--petal-left); }
 
-@media (max-width: 540px) {
+@container (max-width: 580px) {
   #garden .petal-fall:nth-child(1) { left: 7%; }
   #garden .petal-fall:nth-child(2) { left: 38%; }
   #garden .petal-fall:nth-child(3) { left: 68%; }
@@ -44,7 +45,7 @@
   background: transparent;
 }
 
-#work:focus, .notebook-note:focus { outline: none; }
+.notebook-page:focus { outline: none; }
 
 body.notebook-view #work.page { max-width: none; padding: 0; }
 
@@ -57,7 +58,7 @@ body.notebook-view #work.page { max-width: none; padding: 0; }
   --packet-row: clamp(208px, 27svh, 260px);
   position: relative;
   display: grid;
-  grid-template-columns: repeat(2, 100%);
+  grid-template-columns: repeat(4, 100%);
   min-height: 100svh;
   overflow-x: auto;
   overscroll-behavior-x: contain;
@@ -96,21 +97,9 @@ body.notebook-view #work.page { max-width: none; padding: 0; }
   pointer-events: none;
 }
 
-.notebook-back {
-  display: inline-block;
-  color: #5d5548;
-  font-size: 12px;
-  text-underline-offset: 3px;
-  pointer-events: auto;
-}
-
-.notebook-next-spread { position: absolute; top: 34px; right: clamp(24px, 4vw, 58px); }
-.notebook-page-back { position: absolute; top: 34px; left: clamp(32px, 4vw, 58px); }
-
 .notebook-note { padding: clamp(28px, 6vw, 72px) clamp(32px, 6vw, 80px) 96px; }
 .notebook-note-content { max-width: 520px; margin-inline: auto; }
-.notebook-note-links { display: flex; flex-wrap: wrap; gap: 10px 20px; }
-.notebook-note h2 {
+#work .notebook-note h2 {
   margin: 27px 0 8px;
   color: var(--notebook-ink);
   font: 600 clamp(43px, 5.5vw, 64px)/1.05 Caveat, cursive;
@@ -183,7 +172,7 @@ body.notebook-view #work.page { max-width: none; padding: 0; }
 #work .pk-k { font-size: 9px; letter-spacing: .14em; }
 #work .pk-v { font-size: 11.5px; }
 
-.notebook-page-number { position: absolute; right: 26px; bottom: 24px; color: #5e5545; font: 22px/1 Caveat, cursive; }
+.notebook-page-number { position: absolute; left: 50%; bottom: 24px; color: #5e5545; font: 22px/1 Caveat, cursive; }
 
 .notebook-binding {
   position: absolute;
@@ -221,27 +210,51 @@ body.notebook-view #work.page { max-width: none; padding: 0; }
 .notebook-binding i::before { top: 0; }
 .notebook-binding i::after { bottom: 0; }
 
-.notebook-pagination {
+.notebook-bookmark {
   position: absolute;
-  inset: auto 48px 18px;
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  pointer-events: none;
-}
-.notebook-pagination button, .notebook-pagination a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 13px;
-  border: 1px solid #a49679;
-  border-radius: 4px;
-  background: #f5eedb;
-  color: #4b4946;
-  font: 500 14px/1 Inter, system-ui, sans-serif;
+  z-index: 5;
+  top: 0;
+  right: clamp(25px, 5vw, 72px);
+  min-height: 48px;
+  padding: 8px 13px 14px;
+  background: #d7c8a7;
+  color: #473e32;
+  clip-path: polygon(0 0,100% 0,100% 100%,50% 83%,0 100%);
+  font: 600 20px/1.25 Caveat, cursive;
   text-decoration: none;
-  cursor: pointer;
-  pointer-events: auto;
+}
+.notebook-bookmark:hover, .notebook-bookmark:focus-visible { background: #c7b68f; text-decoration: underline; }
+
+.notebook-corner {
+  position: absolute;
+  bottom: 7px;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: #574b38;
+  font: 32px/1 Georgia, serif;
+  text-decoration: none;
+}
+.notebook-corner.previous { left: 17px; }
+.notebook-corner.next { right: 12px; }
+.notebook-corner:hover { background: #a48c5c23; border-radius: 8px; }
+
+@media (min-width: 861px) {
+  body:not(.notebook-view) {
+    background: linear-gradient(#f7f1dee8,#f7f1dee8), url("images/with/scratch-paper.svg"), #f7f1de;
+  }
+  #garden.hero { width: 50%; margin-inline-start: auto; box-shadow: -14px 0 28px -23px #51452eb0; }
+  .notebook-spread { grid-template-columns: repeat(4, 50%); }
+  .notebook-left {
+    --fold: linear-gradient(90deg, #8b754414, transparent 8% 90%, #957d5129 98%, #67563755);
+    border-radius: 24px 0 0 24px;
+    transform-origin: right center;
+    box-shadow: inset 0 0 0 1px #7a69432e;
+  }
+  .notebook-right { border-radius: 0 24px 24px 0; scroll-snap-align: none; }
+  .notebook-binding { left: 50%; }
+  .notebook-left .notebook-corner.next, .notebook-right .notebook-corner.previous { display: none; }
 }
 
 @media (max-width: 500px) {
