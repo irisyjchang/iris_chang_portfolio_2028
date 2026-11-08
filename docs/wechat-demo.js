@@ -47,18 +47,20 @@ class WechatAccessibilityDemo extends HTMLElement {
             </div>
           </div>
         </div>
-        <div class="wechat-screen wechat-call" aria-labelledby="wechat-call-heading">
-          <div class="wechat-screen-heading">
-            <span>02 · Video calls</span>
-            <strong id="wechat-call-heading">Call with Mei</strong>
-          </div>
-          <div class="wechat-call-stage">
-            <span class="wechat-call-avatar" aria-hidden="true">M</span>
-            <div class="wechat-caption" lang="zh-Hans" aria-live="polite" aria-atomic="true"></div>
-          </div>
-          <div class="wechat-screen-foot wechat-call-controls">
-            <button type="button" class="wechat-button" data-play>Play sample call</button>
-            <button type="button" class="wechat-button wechat-cc" data-cc aria-pressed="false" aria-label="Live captions"><span aria-hidden="true">CC</span><span data-cc-state aria-hidden="true">Off</span></button>
+        <div class="pk-int-phone wechat-phone">
+          <div class="pk-int-screen wechat-call" aria-labelledby="wechat-call-heading">
+            <div class="wechat-screen-heading">
+              <span>02 · Video calls</span>
+              <strong id="wechat-call-heading">Call with Mei</strong>
+            </div>
+            <div class="wechat-call-stage">
+              <span class="wechat-call-avatar" aria-hidden="true">M</span>
+              <div class="wechat-caption" lang="zh-Hans" aria-live="polite" aria-atomic="true"></div>
+            </div>
+            <div class="wechat-screen-foot wechat-call-controls">
+              <button type="button" class="wechat-button" data-play>Play sample call</button>
+              <button type="button" class="wechat-button wechat-cc" data-cc aria-pressed="false" aria-label="Live captions"><span aria-hidden="true">CC</span><span data-cc-state aria-hidden="true">Off</span></button>
+            </div>
           </div>
         </div>
       </div>

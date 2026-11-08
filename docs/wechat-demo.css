@@ -75,32 +75,22 @@ wechat-accessibility-demo [hidden] { display: none; }
 .wechat-settings small { color: var(--wc-muted); font-size: 12px; font-weight: 400; }
 .wechat-demo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
 
-.wechat-screen {
+.wechat-phone .pk-int-screen {
   display: flex;
   flex-direction: column;
-  min-width: 0;
-  min-height: 412px;
-  overflow: hidden;
-  border: 1px solid var(--wc-line);
-  border-radius: 20px;
-  background: #fff;
 }
 
-.wechat-screen-heading { padding: 14px 16px; border-bottom: 1px solid var(--wc-line); }
+.wechat-screen-heading { padding: 32px 16px 14px; border-bottom: 1px solid var(--wc-line); text-align: center; }
 .wechat-screen-heading > span { color: var(--wc-muted); }
 .wechat-screen-heading > strong { display: block; margin-top: 2px; font-size: 17px; }
 .wechat-phone { margin-block: 3px; }
 .pk-int-screen.wechat-chat {
-  display: flex;
-  flex-direction: column;
   background: #141414;
   color: #f3f3f3;
 }
 .wechat-chat .wechat-screen-heading {
-  padding-top: 32px;
   border-color: #303030;
   background: #1b1b1b;
-  text-align: center;
 }
 .wechat-chat .wechat-screen-heading > span { color: #bbb; }
 .wechat-thread {
@@ -184,7 +174,7 @@ wechat-accessibility-demo [hidden] { display: none; }
 }
 
 .wechat-button:hover { background: #e2f0e2; }
-.wechat-call { border-color: #243a30; background: #182e24; color: #fff; }
+.pk-int-screen.wechat-call { background: #182e24; color: #fff; }
 .wechat-call .wechat-screen-heading,
 .wechat-call .wechat-screen-foot { border-color: #435c50; }
 .wechat-call .wechat-screen-heading > span { color: #b9d8c4; }
@@ -224,7 +214,7 @@ wechat-accessibility-demo [hidden] { display: none; }
 }
 
 .wechat-caption:empty { background: transparent; }
-.wechat-call-controls { display: flex; justify-content: space-between; gap: 8px; }
+.wechat-call-controls { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 .wechat-cc { display: inline-flex; align-items: center; gap: 6px; }
 .wechat-cc > span:first-child { padding: 1px 4px; border: 1px solid currentColor; border-radius: 4px; }
 .wechat-cc[aria-pressed="false"] { border-color: #8ba495; background: #30493d; color: #fff; }
@@ -263,7 +253,6 @@ wechat-accessibility-demo [hidden] { display: none; }
 
 @media (max-width: 670px) {
   .wechat-demo-grid { grid-template-columns: minmax(0, 1fr); }
-  .wechat-screen { min-height: 0; }
 }
 
 @media (max-width: 580px) {
